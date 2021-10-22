@@ -5,26 +5,18 @@ import java.util.List;
 
 public class Member {
 
-    int id;
     String firstName;
     String lastName;
     String mail;
     List<Book> borrowedBooks;
+    boolean hasBorrowed;
 
-    public Member(int id, String firstName, String lastName, String mail) {
-        this.id = id;
+    public Member(String firstName, String lastName, String mail) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.mail = mail;
         this.borrowedBooks = new ArrayList<>();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        hasBorrowed = false;
     }
 
     public String getFirstName() {
@@ -51,11 +43,19 @@ public class Member {
         this.mail = mail;
     }
 
-    public List<Book> getBorrowed() {
+    public List<Book> getBorrowedBooks() {
         return borrowedBooks;
     }
 
-    public void setBorrowed(List<Book> borrowedBooks) {
+    public void setBorrowedBooks(List<Book> borrowedBooks) {
         this.borrowedBooks = borrowedBooks;
+    }
+
+    public boolean isHasBorrowed() {
+        return hasBorrowed;
+    }
+
+    public void setHasBorrowed(boolean hasBorrowed) {
+        this.hasBorrowed = hasBorrowed;
     }
 }
