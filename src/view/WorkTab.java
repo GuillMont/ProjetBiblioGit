@@ -37,9 +37,14 @@ public class WorkTab {
 
 
         /**Définit le remplissage des colonnes*/
-        titleColumn.setCellValueFactory(new PropertyValueFactory<>("titre"));
-        authorColumn.setCellValueFactory(new PropertyValueFactory<>("auteur"));
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        /** Définit l'affichage du tableau */
+        tableWork.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableWork.getColumns().setAll(titleColumn, authorColumn, dateColumn);
+        tableWork.setStyle("-fx-selection-bar: #b0e9ff;");
 
         updateList();
 
