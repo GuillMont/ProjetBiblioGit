@@ -18,9 +18,21 @@ import java.util.List;
 
 public class Parser {
 
-    static List<Work> workList = new ArrayList<Work>();
+    public List<Work> workList = new ArrayList<Work>();
     public  List<Book> livres = new ArrayList<Book>();
     Document document;
+
+    public Parser(){
+        try {
+            parseWorks();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void parseWorks() throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

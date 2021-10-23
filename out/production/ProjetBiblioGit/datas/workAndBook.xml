@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Works>
     <Work id="1">
-        <Title>Victor Hugo</Title>
-        <Author>Les Miserables</Author>
+        <Author>Victor Hugo</Author>
+        <Title>Les Miserables</Title>
         <Date>01/01/1862</Date>
         <Books>
             <Book id="11">

@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Work {
 
     String title;
@@ -38,5 +41,16 @@ public class Work {
 
     public String toString(){
         return getTitle()+"; " + getAuthor() + " ("+getDate()+")";
+    }
+
+    public List<Book> getBooks(List<Book> allBooks){
+        List<Book> books = new ArrayList<>();
+        for(Book book : allBooks){
+            if(book.getWork()==this){
+                books.add(book);
+            }
+        }
+        return books;
+
     }
 }

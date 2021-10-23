@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Book {
 
     public int id;
@@ -49,4 +52,5 @@ public class Book {
     public String toString(){
         return getId()+"; "+getPurchaseDate()+" ("+isAvailable+")";
     }
+
 }
