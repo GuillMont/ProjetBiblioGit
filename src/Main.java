@@ -1,4 +1,5 @@
 import controller.MemberController;
+import controller.WorkController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
@@ -12,6 +13,9 @@ public class Main extends Application {
         /** Test controller */
         MemberController memberController = new MemberController();
         System.out.println(memberController.getMembers().size());
+
+        WorkController workController = new WorkController();
+        System.out.println("Nombre d'oeuvres : " + workController.getWorks().size());
 
 
         final StackPane root = new StackPane();
