@@ -45,4 +45,8 @@ public class Book {
     public void setWork(Work oeuvre) {
         this.work = oeuvre;
     }
+
+    public String toString(){
+        return getId()+"; "+getPurchaseDate()+" ("+isAvailable+")";
+    }
 }
