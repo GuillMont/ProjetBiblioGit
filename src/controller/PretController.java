@@ -19,6 +19,8 @@ import view.WorkTab;
 import java.util.ArrayList;
 import java.util.List;
 
+import static view.WorkTab.*;
+
 public class PretController {
 
     List<Book> availableBooks;
@@ -115,6 +117,7 @@ public class PretController {
             if(member.getBorrowedBooks().size()>0) member.setHasBorrowed(true);
 
             Parser.setMemberList(members);
+            workController.parser.updateMembreXML(members);
 
         //    workTab.updateList();
 

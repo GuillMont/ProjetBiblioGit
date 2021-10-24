@@ -3,6 +3,7 @@ package controller;
 import model.Book;
 import model.Member;
 import model.Work;
+import org.junit.platform.engine.support.descriptor.FileSystemSource;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -145,6 +146,33 @@ public class Parser {
                 String mail = elem.getElementsByTagName("Mail").item(0)
                         .getChildNodes().item(0).getNodeValue();
                 Member member = new Member(id,firstName, lastName, mail);
+
+                Node booksElement = elem.getElementsByTagName("Books").item(0);
+
+                Element element = (Element) booksElement;
+
+                for(int j=0;j<element.getElementsByTagName("Book").getLength();j++){
+                    Node bookNode = element.getElementsByTagName("Book").item(j);
+                    Element bookElement = (Element) bookNode;
+
+                    int idBook= Integer.parseInt(bookElement.getAttribute("id"));
+
+                    Book book=null
+                            ;
+                    for(Book books : bookList){
+                        if(books.getId()==Integer.parseInt(String.valueOf(idBook))){
+                            book = books;
+                            books.setAvailable(false);
+                            member.getBorrowedBooks().add(book);
+                            member.setHasBorrowed(true);
+                        }
+
+
+                    }
+
+
+                    System.out.println(member.getBorrowedBooks());
+                }
                 memberList.add(member);
             }
         }
@@ -179,6 +207,20 @@ public class Parser {
                 rootElement.appendChild(utilisateur);
                 count++;
                 this.lastMember=count;
+                Element donnees = doc.createElement("Books");
+
+                System.out.println(member.getBorrowedBooks());
+                for( Book book : member.getBorrowedBooks()){
+                    //if(book == counterUser){
+                        Element donnee = doc.createElement("Book");
+                        donnee.setAttribute("id",String.valueOf(book.id));
+                        donnees.appendChild(donnee);
+
+                        donnees.appendChild(donnee);
+                   // }
+                }
+              //  counterUser++;
+                utilisateur.appendChild(donnees);
 
             }
 

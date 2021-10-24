@@ -4,20 +4,43 @@
         <FirstName>Laura</FirstName>
         <LastName>Jeanneton</LastName>
         <Mail>laura.jeanneton@etu.univ-amu.fr</Mail>
+        <Books>
+            <Book id="3"/>
+        </Books>
     </Membre>
     <Membre id="1">
         <FirstName>Nicolas</FirstName>
         <LastName>Cauet</LastName>
         <Mail>nicolas.cauet@etu.univ-amu.fr</Mail>
+        <Books>
+            <Book id="4"/>
+        </Books>
     </Membre>
     <Membre id="2">
         <FirstName>Guillaume</FirstName>
         <LastName>Montagner</LastName>
         <Mail>guillaume.montagner@etu.univ-amu.fr</Mail>
+        <Books/>
     </Membre>
     <Membre id="3">
-        <FirstName>fd</FirstName>
-        <LastName>ff</LastName>
-        <Mail>fff</Mail>
+        <FirstName>Laura</FirstName>
+        <LastName>Jeanneton</LastName>
+        <Mail>laura.jeanneton@etu.univ-amu.fr</Mail>
+        <Books>
+            <Book id="3"/>
+            <Book id="3"/>
+        </Books>
+    </Membre>
+    <Membre id="4">
+        <FirstName>Nicolas</FirstName>
+        <LastName>Cauet</LastName>
+        <Mail>nicolas.cauet@etu.univ-amu.fr</Mail>
+        <Books/>
+    </Membre>
+    <Membre id="5">
+        <FirstName>Guillaume</FirstName>
+        <LastName>Montagner</LastName>
+        <Mail>guillaume.montagner@etu.univ-amu.fr</Mail>
+        <Books/>
     </Membre>
 </Membres>

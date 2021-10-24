@@ -16,7 +16,7 @@ import java.util.Optional;
 
 public class WorkTab {
 
-    private static WorkController workController;
+    public static WorkController workController;
     public VBox vBoxWork;
     public static TreeTableView<Object> tableWork;
 
@@ -76,7 +76,7 @@ public class WorkTab {
 
         /*** Faire un pret ***/
         buttonPret.setOnMouseClicked(e->{
-            
+
             new PretController(workController.getAvailableBook(),workController.parser.memberList,this);
         });
 
