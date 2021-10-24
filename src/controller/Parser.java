@@ -182,6 +182,9 @@ public class Parser {
         }
     }
 
+    public void updateWorkXML(List<Work> works){
+    }
+
     public List<Work> getWorkList() {
         return workList;
     }

@@ -1,23 +1,18 @@
 package view;
 
-import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
-import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import controller.WorkController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import model.Book;
-import model.Member;
 import model.Work;
 
-import java.util.Observable;
+
 import java.util.Optional;
 
 public class WorkTab {
@@ -32,13 +27,6 @@ public class WorkTab {
 
         /**Création du bouton d'ajout d'oeuvre*/
         Button buttonAddWork = new Button("Ajouter une oeuvre");
-
-        /**Création du bouton de validation de recherche*/
-        Button buttonResearch = new Button("Rechercher");
-
-        /**Création du bouton de validation de recherche*/
-        Button buttonDeleteResearch = new Button("Annuler la recherche");
-
 
         /**Création des colonnes du tableau*/
         tableWork = new TreeTableView<>();
@@ -112,7 +100,7 @@ public class WorkTab {
             };
         });
 
-        vBoxWork.getChildren().addAll(buttonAddWork, buttonResearch, buttonDeleteResearch, tableWork);
+        vBoxWork.getChildren().addAll(buttonAddWork, tableWork);
         updateList();
 
 
@@ -156,6 +144,8 @@ public class WorkTab {
         tableWork.setRoot(main);
 
     }
+
+
 
     public VBox getvBoxWork() {
         return vBoxWork;
