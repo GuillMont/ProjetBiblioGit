@@ -21,6 +21,8 @@ public class MembersTab {
         this.memberController = memberController;
         Button buttonAddAdherent = new Button("Ajouter un adherent");
 
+        Button buttonRemoveAdherent = new Button("Supprimer un adhérent");
+
         /** Création des colonnes du tableau */
         tableAdherent = new TableView();
         final TableColumn<Member, String> firstNameColumn = new TableColumn<>("Prénom");
@@ -65,9 +67,23 @@ public class MembersTab {
         tableAdherent.getColumns().setAll(informationsAdherentColumn,hasBorrowedColumn);
         tableAdherent.setStyle("-fx-selection-bar: #b0e9ff;");
 
+        buttonRemoveAdherent.setOnMouseClicked(e->{
+            if(tableAdherent.getSelectionModel().getSelectedCells().size()>0){
+                System.out.println(tableAdherent.getSelectionModel().getSelectedCells().toString());
+                Member member = tableAdherent.getSelectionModel().getSelectedItem();
+                if(member.isHasBorrowed()){
+                    new Alert(Alert.AlertType.ERROR,"Impossible de supprimer le membre : des prets sont en cours").show();
+                }
+                else{
+                    memberController.getMembers().remove(member);
+                    updateList();
+                    memberController.getParser().getMemberList().remove(member);
+                    memberController.getParser().updateMembreXML(memberController.getMembers());
+                }
+            }
+        });
 
-
-        vBoxAdherent.getChildren().addAll(buttonAddAdherent, tableAdherent);
+        vBoxAdherent.getChildren().addAll(buttonAddAdherent,buttonRemoveAdherent, tableAdherent);
 
         /** Ajout d'un membre */
         buttonAddAdherent.setOnMouseClicked(e ->
@@ -96,6 +112,7 @@ public class MembersTab {
     public static void updateList(){
         System.out.println("Update list members");
         ObservableList<Member> membersList = FXCollections.observableArrayList(memberController.getMembers());
+        System.out.println(membersList);
         tableAdherent.setItems(membersList);
     }
 
