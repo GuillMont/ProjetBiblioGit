@@ -3,7 +3,6 @@ package controller;
 import model.Book;
 import model.Member;
 import model.Work;
-import org.junit.platform.engine.support.descriptor.FileSystemSource;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -41,7 +40,6 @@ public class Parser {
     }
 
     public Parser(){
-       System.out.println("Cosntruct");
         dataWorkAndBook_pathName = "src/datas/workAndBook.xml";
         dataMember_pathName = "src/datas/member.xml";
         try {
@@ -171,14 +169,11 @@ public class Parser {
 
                     }
 
-
-                    System.out.println(member.getBorrowedBooks());
                 }
                 memberList.add(member);
 
             }
         }
-        System.out.println("Size : "+ memberList.size());
     }
 
     public void updateMembreXML(List<Member> membres){
@@ -212,17 +207,13 @@ public class Parser {
                 this.lastMember=count;
                 Element donnees = doc.createElement("Books");
 
-                System.out.println(member.getBorrowedBooks());
                 for( Book book : member.getBorrowedBooks()){
-                    //if(book == counterUser){
                         Element donnee = doc.createElement("Book");
                         donnee.setAttribute("id",String.valueOf(book.id));
                         donnees.appendChild(donnee);
 
                         donnees.appendChild(donnee);
-                   // }
                 }
-              //  counterUser++;
                 utilisateur.appendChild(donnees);
 
             }
@@ -325,9 +316,7 @@ public class Parser {
     public static void setBook(Book book){
       for(Book books : bookList){
         if(book.getId()==books.getId()){
-            System.out.print("SET BOOK : " + book.isIsAvailable() + " TO " + book);
             books.setAvailable(false);
-            System.out.print("SET BOOK : " + book.isIsAvailable() + " TO " + book);
         }
 
       }
@@ -337,9 +326,7 @@ public class Parser {
     public static void setBookAvailable(Book book){
         for(Book books : bookList){
             if(book.getId()==books.getId()){
-                System.out.println("SET BOOK : " + book.isIsAvailable() + " TO " + book);
                 books.setAvailable(true);
-                System.out.println("SET BOOK : " + book.isIsAvailable() + " TO " + book);
             }
 
         }

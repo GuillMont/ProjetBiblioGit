@@ -7,7 +7,7 @@
         <Books>
             <Book id="2">
                 <PurchaseDate>12/06/2021</PurchaseDate>
-                <IsAvailable>true</IsAvailable>
+                <IsAvailable>false</IsAvailable>
             </Book>
             <Book id="3">
                 <PurchaseDate>12/06/2021</PurchaseDate>

@@ -13,7 +13,9 @@
         <FirstName>Nicolas</FirstName>
         <LastName>Cauet</LastName>
         <Mail>nicolas.cauet@etu.univ-amu.fr</Mail>
-        <Books/>
+        <Books>
+            <Book id="2"/>
+        </Books>
     </Membre>
     <Membre id="2">
         <FirstName>Guillaume</FirstName>

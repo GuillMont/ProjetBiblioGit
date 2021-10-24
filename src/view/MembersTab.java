@@ -112,7 +112,6 @@ public class MembersTab {
     public static void updateList(){
         System.out.println("Update list members");
         ObservableList<Member> membersList = FXCollections.observableArrayList(memberController.getMembers());
-        System.out.println(membersList);
         tableAdherent.setItems(membersList);
     }
 

@@ -3,18 +3,11 @@ package controller;
 import model.Member;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MemberController {
     List<Member> members;
     Parser parser;
-
-    public MemberController(){
-        members = new ArrayList<>();
-        parser = new Parser();
-        populate();
-    }
 
     //constructeur utile pour choisir le parser, et par extension, les données à manipuler (dans le cadre de tests par exemple)
     public MemberController(Parser parser){

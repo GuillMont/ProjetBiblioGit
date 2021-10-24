@@ -6,14 +6,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Book;
 import model.Member;
-import model.Work;
-import view.AllTabs;
 import view.WorkTab;
 
 import java.util.ArrayList;
@@ -87,7 +84,6 @@ public class PretController {
 
     public void initMembre(){
         VBox box = new VBox();
-        System.out.println(this.members.size()+ "MEMEBER SIZE");
         for(Member member : this.members){
             RadioButton button1 = new RadioButton(member.getFirstName()+" "+member.getLastName());
 
@@ -119,15 +115,12 @@ public class PretController {
                 Parser.setBook(book);
             }
 
-
             member.getBorrowedBooks().addAll(memberBook);
             if(member.getBorrowedBooks().size()>0) member.setHasBorrowed(true);
 
             Parser.setMemberList(members);
             workTab.getWorkController().parser.updateMembreXML(members);
             workTab.getWorkController().parser.updateWorkXML(workTab.getWorkController().getParser().workList);
-
-        //    workTab.updateList();
 
             stage.close();
         });
@@ -153,7 +146,6 @@ public class PretController {
     }
 
     public void initRenduButton(){
-        System.out.println(workTab.getWorkController().getParser().getMemberList());
         Button rendre = new Button("Rendre le livre");
         rendre.setOnMouseClicked(e->{
 
