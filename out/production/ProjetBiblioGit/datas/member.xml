@@ -19,8 +19,6 @@
         <FirstName>Guillaume</FirstName>
         <LastName>Montagner</LastName>
         <Mail>guillaume.montagner@etu.univ-amu.fr</Mail>
-        <Books>
-            <Book id="12"/>
-        </Books>
+        <Books/>
     </Membre>
 </Membres>

@@ -70,8 +70,14 @@ public class PretController {
         box.setPadding(new Insets(10));
         box.setSpacing(5);
         for(Book book : availableBooks){
+            Member member=null;
+            for(Member member1 : workTab.getWorkController().getParser().getMemberList()){
+                if(member1.getBorrowedBooks().contains(book))
+                    member=member1;
+            }
             RadioButton button1 = new RadioButton(book.getWork().getTitle()+" - "+ book.work.getAuthor()+" ("+book.getPurchaseDate()+")");
-
+            if(member!=null)
+                button1.setText(book.getWork().getTitle()+" - "+ book.work.getAuthor()+" ("+book.getPurchaseDate()+")             //   " + member.getFirstName()+" " + member.getLastName());
             button1.setSelected(false);
             radioBooks.add(button1);
             box.getChildren().add(button1);

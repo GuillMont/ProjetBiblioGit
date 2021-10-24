@@ -11,7 +11,7 @@
             </Book>
             <Book id="3">
                 <PurchaseDate>12/06/2021</PurchaseDate>
-                <IsAvailable>false</IsAvailable>
+                <IsAvailable>true</IsAvailable>
             </Book>
             <Book id="4">
                 <PurchaseDate>20/10/2021</PurchaseDate>
@@ -53,7 +53,7 @@
             </Book>
             <Book id="12">
                 <PurchaseDate>24/06/2018</PurchaseDate>
-                <IsAvailable>false</IsAvailable>
+                <IsAvailable>true</IsAvailable>
             </Book>
         </Books>
     </Work>
