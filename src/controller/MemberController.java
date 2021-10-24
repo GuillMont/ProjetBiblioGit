@@ -7,12 +7,20 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MemberController {
-
     List<Member> members;
     Parser parser;
 
     public MemberController(){
         members = new ArrayList<>();
+        parser = new Parser();
+        populate();
+    }
+
+    //constructeur utile pour choisir le parser, et par extension, les données à manipuler (dans le cadre de tests par exemple)
+    public MemberController(Parser parser){
+        members = new ArrayList<>();
+        this.parser = parser;
+        populate();
     }
 
     public List<Member> getMembers(){
@@ -20,11 +28,6 @@ public class MemberController {
     }
 
     public void populate(){
-
-        /*Member member1 = new Member("Jean-Luc", "Massat", "jean-luc.massat@univ-amu.fr");
-        Member member2 = new Member("Nicolas", "Hoarau", "nicolas-hoarau@univ-amu.fr");
-        Member member3 = new Member("Noel", "Novelli", "noel-novelli@univ-amu.fr");
-        members.addAll(Arrays.asList(member1, member2, member3));*/
         members.addAll(parser.memberList);
     }
 

@@ -173,7 +173,7 @@ public class Parser {
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
             DOMSource source = new DOMSource(doc);
 
-            StreamResult result =  new StreamResult(new File("src/datas/member.xml"));
+            StreamResult result =  new StreamResult(new File(dataMember_pathName));
             transformer.transform(source, result);
 
 
