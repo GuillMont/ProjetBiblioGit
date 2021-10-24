@@ -64,6 +64,7 @@ public class WorkTab {
 //                            Object data = getTreeTableView().getRoot().getParent().getChildren().get(getIndex());//getTableView().getItems().get(getIndex());
                             System.out.println(getIndex());
                             System.out.println(param.getCellObservableValue(getIndex())
+
                             );
                         });
                     }

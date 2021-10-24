@@ -209,22 +209,30 @@ public class Parser {
                 Element date = doc.createElement("Date");
                 date.appendChild(doc.createTextNode(String.valueOf(work.getDate())));
                 workBalise.appendChild(date);
-
-                /*** Remplir les infos des livres quand on aura implémenté la fonction d'ajouter un livre a une oeuvre ***/
                 Element booksBalise = doc.createElement("Books");
+                countWork ++;
+                /*** Remplir les infos des livres quand on aura implémenté la fonction d'ajouter un livre a une oeuvre ***/
+                for(Book book : work.getBooks(this.bookList)){
+                    Element bookElement = doc.createElement("Book");
+                    bookElement.setAttribute("id", countWork + "");
+                    booksBalise.appendChild(bookElement);
 
-                Element book = doc.createElement("Book");
-                booksBalise.appendChild(book);
+                    Element purchaseDate = doc.createElement("PurchaseDate");
+                    purchaseDate.appendChild(doc.createTextNode(book.purchaseDate));
+                    bookElement.appendChild(purchaseDate);
 
-                Element purchaseDate = doc.createElement("PurchaseDate");
-                book.appendChild(purchaseDate);
-
-                Element isAvailable = doc.createElement("IsAivailable");
-                book.appendChild(isAvailable);
-
+                    Element isAvailable = doc.createElement("IsAvailable");
+                    isAvailable.appendChild(doc.createTextNode(String.valueOf(book.isAvailable)));
+                    bookElement.appendChild(isAvailable);
+                    booksBalise.appendChild(bookElement);
+                    countWork ++;
+                }
                 workBalise.appendChild(booksBalise);
                 rootElement.appendChild(workBalise);
-                countWork ++;
+
+
+
+
             }
 
             TransformerFactory transformerFactory =  TransformerFactory.newInstance();
