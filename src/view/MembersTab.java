@@ -58,11 +58,14 @@ public class MembersTab {
             };
         });
 
+
         /** Définit l'affichage du tableau */
         tableAdherent.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         informationsAdherentColumn.getColumns().setAll(firstNameColumn, lastNameColumn, mailColumn);
         tableAdherent.getColumns().setAll(informationsAdherentColumn,hasBorrowedColumn);
         tableAdherent.setStyle("-fx-selection-bar: #b0e9ff;");
+
+
 
         vBoxAdherent.getChildren().addAll(buttonAddAdherent, tableAdherent);
 
@@ -81,7 +84,9 @@ public class MembersTab {
                     TextInputDialog adresse = new TextInputDialog();
                     adresse.setHeaderText("Entrez l'adresse.");
                     Optional<String> adresseLue = adresse.showAndWait();
-                    memberController.addMember(new Member(prenomLu.get(), nomLu.get(), adresseLue.get()));
+                    memberController.addMember(new Member(memberController.getParser().lastMember,prenomLu.get(), nomLu.get(), adresseLue.get()));
+                    System.out.println("last member : " + memberController.getParser().lastMember);
+                    memberController.getParser().lastMember++;
                     updateList();
                     }
                 }

@@ -29,6 +29,7 @@ public class Parser {
     String dataWorkAndBook_pathName;
     String dataMember_pathName;
    public int lastWorkBook = 0;
+   public int lastMember =0;
 
    public static void setBookList(List<Book> books){
         bookList=books;
@@ -132,6 +133,7 @@ public class Parser {
 
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element elem = (Element) node;
+                int id = Integer.parseInt(elem.getAttribute("id"));
 
                 String firstName = elem.getElementsByTagName("FirstName")
                         .item(0).getChildNodes().item(0).getNodeValue();
@@ -142,7 +144,7 @@ public class Parser {
 
                 String mail = elem.getElementsByTagName("Mail").item(0)
                         .getChildNodes().item(0).getNodeValue();
-                Member member = new Member(firstName, lastName, mail);
+                Member member = new Member(id,firstName, lastName, mail);
                 memberList.add(member);
             }
         }
@@ -150,6 +152,7 @@ public class Parser {
 
     public void updateMembreXML(List<Member> membres){
         try {
+            int count=0;
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
@@ -161,7 +164,7 @@ public class Parser {
 
             for(Member member: membres){
                 Element utilisateur = doc.createElement("Membre");
-
+                utilisateur.setAttribute("id", String.valueOf(count));
                 Element firstName = doc.createElement("FirstName");
                 firstName.appendChild(doc.createTextNode(member.getFirstName()));
                 utilisateur.appendChild(firstName);
@@ -174,6 +177,9 @@ public class Parser {
                 mail.appendChild(doc.createTextNode(String.valueOf(member.getMail())));
                 utilisateur.appendChild(mail);
                 rootElement.appendChild(utilisateur);
+                count++;
+                this.lastMember=count;
+
             }
 
             TransformerFactory transformerFactory =  TransformerFactory.newInstance();

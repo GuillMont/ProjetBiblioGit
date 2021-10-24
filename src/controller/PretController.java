@@ -56,11 +56,9 @@ public class PretController {
     }
 
     public void initAvailableBook(){
-
         VBox box = new VBox();
         box.setPadding(new Insets(10));
         box.setSpacing(5);
-
         for(Book book : availableBooks){
             RadioButton button1 = new RadioButton(book.getWork().getTitle()+" - "+ book.work.getAuthor()+" ("+book.getPurchaseDate()+")");
 
@@ -69,7 +67,6 @@ public class PretController {
             box.getChildren().add(button1);
         }
         Hbox.getChildren().add(box);
-
     }
 
     public void initMembre(){
@@ -81,8 +78,7 @@ public class PretController {
             radioMember.add(button1);
             box.getChildren().add(button1);
         }
-        Hbox
-                .getChildren().add(box);
+        Hbox.getChildren().add(box);
     }
 
     public void initSaveButton(){

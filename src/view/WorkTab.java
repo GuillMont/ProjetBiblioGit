@@ -18,6 +18,7 @@ import model.Book;
 import model.Work;
 
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class WorkTab {
@@ -78,7 +79,9 @@ public class WorkTab {
         vBoxWork.getChildren().addAll(buttonAddWork, buttonAddBooks,buttonPret, tableWork);
         updateList();
 
+
         buttonPret.setOnMouseClicked(e->{
+            
             new PretController(workController.getAvailableBook(),workController.parser.memberList,this);
         });
 
