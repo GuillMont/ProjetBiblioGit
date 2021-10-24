@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Membres>
     <Membre>
         <FirstName>Laura</FirstName>
@@ -14,5 +14,10 @@
         <FirstName>Guillaume</FirstName>
         <LastName>Montagner</LastName>
         <Mail>guillaume.montagner@etu.univ-amu.fr</Mail>
+    </Membre>
+    <Membre>
+        <FirstName>Jean</FirstName>
+        <LastName>Massat</LastName>
+        <Mail>adresse@f</Mail>
     </Membre>
 </Membres>

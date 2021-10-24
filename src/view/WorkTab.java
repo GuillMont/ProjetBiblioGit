@@ -1,12 +1,15 @@
 package view;
 
+import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import controller.WorkController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 import model.Book;
 import model.Member;
 import model.Work;
@@ -21,7 +24,7 @@ public class WorkTab {
 
     public WorkTab(WorkController workController) {
         vBoxWork = new VBox();
-        this.workController=workController;
+        this.workController = workController;
 
         /**Création du bouton d'ajout d'oeuvre*/
         Button buttonAddWork = new Button("Ajouter une oeuvre");
@@ -42,7 +45,7 @@ public class WorkTab {
         final TreeTableColumn<Object, String> dateColumn = new TreeTableColumn<>("Date de parution");
         final TreeTableColumn<Object, String> purchaseDate = new TreeTableColumn<>("Date d'achat");
         final TreeTableColumn<Object, Boolean> hasBorrowedColumn = new TreeTableColumn<>("Disponible");
-
+        final TreeTableColumn<Object, Void> pretColumn = new TreeTableColumn<>("Preter");
 
         /**Définit le remplissage des colonnes*/
         titleColumn.setCellValueFactory(new TreeItemPropertyValueFactory<>("title"));
@@ -53,10 +56,43 @@ public class WorkTab {
 
         /** Définit l'affichage du tableau */
         tableWork.setColumnResizePolicy(TreeTableView.CONSTRAINED_RESIZE_POLICY);
-        tableWork.getColumns().setAll(titleColumn, authorColumn, dateColumn,purchaseDate,hasBorrowedColumn);
+        tableWork.getColumns().setAll(titleColumn, authorColumn, dateColumn, purchaseDate, hasBorrowedColumn, pretColumn);
         tableWork.setStyle("-fx-selection-bar: #b0e9ff;");
 
-        hasBorrowedColumn.setCellFactory(column -> {
+        Callback<TreeTableColumn<Object, Void>, TreeTableCell<Object, Void>> cellFactory = new Callback<TreeTableColumn<Object, Void>, TreeTableCell<Object, Void>>() {
+            @Override
+            public TreeTableCell<Object, Void> call(final TreeTableColumn<Object, Void> param) {
+                final TreeTableCell<Object, Void> cell = new TreeTableCell<Object, Void>() {
+
+                    private final Button btn = new Button("Preter");
+
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+//
+//                            Object data = getTreeTableView().getRoot().getParent().getChildren().get(getIndex());//getTableView().getItems().get(getIndex());
+                            System.out.println(getIndex());
+                            System.out.println(param.getCellObservableValue(getIndex())
+                            );
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        pretColumn.setCellFactory(cellFactory);
+
+
+            hasBorrowedColumn.setCellFactory(column -> {
             return new TreeTableCell<Object, Boolean>() {
                 @Override
                 protected void updateItem(Boolean item, boolean empty) {

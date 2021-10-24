@@ -30,6 +30,7 @@ public class MemberController {
 
     public void addMember(Member member){
         members.add(member);
+        parser.updateMembreXML(members);
     }
 
     public void removeMember(Member member){
