@@ -10,12 +10,10 @@ import java.util.List;
 public class WorkController {
 
     private List<Work> works;
-    public Parser parser = new Parser();
+    public Parser parser;
 
     public WorkController() {
         works = new ArrayList<>();
-        populate();
-
     }
 
     public void populate(){
@@ -33,10 +31,20 @@ public class WorkController {
 
     /*** Getter & Setter ***/
     public List<Work> getWorks() {
+        System.out.println(works.size());
         return works;
     }
 
     public void setWorks(List<Work> works) {
         this.works = works;
     }
+
+    public Parser getParser() {
+        return parser;
+    }
+
+    public void setParser(Parser parser) {
+        this.parser = parser;
+    }
+
 }

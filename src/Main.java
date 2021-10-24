@@ -1,5 +1,6 @@
 
         import controller.MemberController;
+        import controller.Parser;
         import controller.WorkController;
         import javafx.application.Application;
         import javafx.scene.Scene;
@@ -14,17 +15,24 @@
 
 public class Main extends Application {
 
+
     @Override
     public void start(Stage primaryStage){
+        /** Parser XML **/
+        Parser parser = new Parser();
+
         /** Test controller */
         MemberController memberController = new MemberController();
-        System.out.println(memberController.getMembers().size());
+        memberController.setParser(parser);
+       // System.out.println(memberController.getMembers().size());
 
         WorkController workController = new WorkController();
-        System.out.println("Nombre d'oeuvres : " + workController.getWorks().size());
+        workController.setParser(parser);
+        workController.populate();
+        //System.out.println("Nombre d'oeuvres : " + workController.getWorks().size());
 
         /*** Onglet des Oeuvres ***/
-        WorkTab workTab = new WorkTab();
+        WorkTab workTab = new WorkTab(workController);
         VBox vBoxWork = workTab.getvBoxWork();
 
         /*** Onglet des Membres ***/

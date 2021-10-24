@@ -18,12 +18,13 @@ import javax.swing.event.ChangeListener;
 
 public class WorkTab {
 
-    private static WorkController workController = new WorkController();
+    private static WorkController workController;
     public VBox vBoxWork;
     public static TreeTableView<Object> tableWork;
 
-    public WorkTab() {
+    public WorkTab(WorkController workController) {
         vBoxWork = new VBox();
+        this.workController=workController;
 
         /**Création du bouton d'ajout d'oeuvre*/
         Button buttonAddWork = new Button("Ajouter une oeuvre");

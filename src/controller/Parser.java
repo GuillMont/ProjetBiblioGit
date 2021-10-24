@@ -61,10 +61,10 @@ public class Parser {
                 this.parserBook(work,elem);
             }
 
-        }
+        }/*
         for(Book book : this.livres)
             System.out.println(book.toString());
-        System.out.println(livres.size());
+        System.out.println(livres.size());*/
     }
 
     public void parserBook(Work work, Element elem){
