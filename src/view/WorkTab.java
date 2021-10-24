@@ -5,20 +5,13 @@ import controller.PretController;
 import controller.WorkController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.util.Callback;
 import model.Book;
 import model.Work;
 
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 public class WorkTab {
@@ -37,6 +30,8 @@ public class WorkTab {
         Button buttonAddBooks = new Button("Ajouter des livres");
 
         Button buttonPret = new Button("Pret");
+
+        Button buttonRenduPret = new Button("Rendre un livre");
 
         /**Création des colonnes du tableau*/
         tableWork = new TreeTableView<>();
@@ -76,13 +71,18 @@ public class WorkTab {
             };
         });
 
-        vBoxWork.getChildren().addAll(buttonAddWork, buttonAddBooks,buttonPret, tableWork);
+        vBoxWork.getChildren().addAll(buttonAddWork, buttonAddBooks,buttonPret, buttonRenduPret, tableWork);
         updateList();
 
-
+        /*** Faire un pret ***/
         buttonPret.setOnMouseClicked(e->{
             
             new PretController(workController.getAvailableBook(),workController.parser.memberList,this);
+        });
+
+        /*** Rendre un livre ***/
+        buttonRenduPret.setOnMouseClicked(e->{
+            new PretController(workController.getNotAvailableBook(),this);
         });
 
         /**Ajout de livres**/
