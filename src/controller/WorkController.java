@@ -1,5 +1,6 @@
 package controller;
 
+import model.Member;
 import model.Work;
 
 import java.lang.reflect.Parameter;
@@ -20,6 +21,10 @@ public class WorkController {
 
     public void populate(){
         works.addAll(parser.workList);
+    }
+
+    public void addWork(Work work){
+        works.add(work);
     }
 
     /*** Getter & Setter ***/

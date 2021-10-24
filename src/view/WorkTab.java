@@ -6,8 +6,11 @@ import controller.WorkController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import model.Book;
@@ -15,6 +18,7 @@ import model.Member;
 import model.Work;
 
 import java.util.Observable;
+import java.util.Optional;
 
 public class WorkTab {
 
@@ -108,12 +112,32 @@ public class WorkTab {
             };
         });
 
+        vBoxWork.getChildren().addAll(buttonAddWork, buttonResearch, buttonDeleteResearch, tableWork);
         updateList();
 
-        vBoxWork.getChildren().addAll(buttonAddWork, buttonResearch, buttonDeleteResearch, tableWork);
 
-        /*** TO DO ***/
-        // Ajouter les fonctions des boutons
+        /** Ajout d'un membre */
+        buttonAddWork.setOnMouseClicked(e ->
+        {
+            TextInputDialog title = new TextInputDialog();
+            title.setHeaderText("Entrez le nom du livre");
+            Optional<String> titleRead = title.showAndWait();
+
+            TextInputDialog author = new TextInputDialog();
+            author.setHeaderText("Entrez un auteur.");
+            Optional<String> authorRead = author.showAndWait();
+
+            TextInputDialog date = new TextInputDialog();
+            date.setHeaderText("Entrez la date de parution du livre.");
+            Optional<String> dateRead = date.showAndWait();
+
+            if (!titleRead.get().isEmpty() && !authorRead.get().isEmpty() && !dateRead.get().isEmpty()) {
+                workController.addWork(new Work(titleRead.get(), authorRead.get(), dateRead.get()));
+                updateList();
+            }
+        });
+
+
     }
 
     private void updateList() {
@@ -130,10 +154,6 @@ public class WorkTab {
 
         }
         tableWork.setRoot(main);
-
-
-
-
 
     }
 
