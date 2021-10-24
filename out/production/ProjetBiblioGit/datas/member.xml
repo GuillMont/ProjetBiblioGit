@@ -43,4 +43,9 @@
         <Mail>guillaume.montagner@etu.univ-amu.fr</Mail>
         <Books/>
     </Membre>
+    <Membre id="3">
+        <FirstName>fd</FirstName>
+        <LastName>ff</LastName>
+        <Mail>fff</Mail>
+    </Membre>
 </Membres>

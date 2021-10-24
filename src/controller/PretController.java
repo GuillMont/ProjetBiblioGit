@@ -33,15 +33,23 @@ public class PretController {
     List<RadioButton> radioMember = new ArrayList<>();
     WorkTab workTab;
 
-
+    /*** Constructeur pour faire un pret ***/
     public PretController(List<Book> availableBooks, List<Member> members, WorkTab workTab){
         this.availableBooks=availableBooks;
         this.members=members;
         this.workTab=workTab;
-        createStage();
+        createStageForPret();
     }
 
-    public void createStage(){
+    /*** Constructeur pour rendre un livre ***/
+    public PretController(List<Book> availableBooks, WorkTab workTab){
+        this.availableBooks=availableBooks;
+        this.workTab=workTab;
+        createStageForRenduLivre();
+    }
+
+    /*** Fonction du prêt d'un livre ***/
+    public void createStageForPret(){
 
         ScrollPane pane = new ScrollPane();
         Scene scene = new Scene(pane,900,500);
@@ -118,5 +126,44 @@ public class PretController {
         this.Hbox.getChildren().add(save);
     }
 
+    /*** Fonction de rendre un livre ***/
 
+    /*** Fonction pour rendre un livre ***/
+    public void createStageForRenduLivre(){
+
+        ScrollPane pane = new ScrollPane();
+        Scene scene = new Scene(pane,900,500);
+
+        initAvailableBook();
+        initRenduButton();
+
+        root.getChildren().add(Hbox);
+        pane.setContent(root);
+        stage.setTitle("Pret");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void initRenduButton(){
+        Button rendre = new Button("Rendre le livre");
+        rendre.setOnMouseClicked(e->{
+
+            Member member = null;
+            List<Book> memberBook = new ArrayList<>();
+            for(int i=0; i<radioBooks.size();i++){
+                if(radioBooks.get(i).isSelected()){
+                    memberBook.add(availableBooks.get(i));
+                }
+            }
+
+            for(Book book : memberBook){
+                book.setAvailable(true);
+                Parser.setBookAvailable(book);
+            }
+
+
+            stage.close();
+        });
+        this.Hbox.getChildren().add(rendre);
+    }
 }

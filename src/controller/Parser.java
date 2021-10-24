@@ -330,4 +330,16 @@ public class Parser {
       }
 
     }
+
+    public static void setBookAvailable(Book book){
+        for(Book books : bookList){
+            if(book.getId()==books.getId()){
+                System.out.println("SET BOOK : " + book.isIsAvailable() + " TO " + book);
+                books.setAvailable(true);
+                System.out.println("SET BOOK : " + book.isIsAvailable() + " TO " + book);
+            }
+
+        }
+
+    }
 }

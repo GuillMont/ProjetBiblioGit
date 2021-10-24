@@ -51,7 +51,16 @@ public class WorkController {
                 availableBooks.add(book);
         }
         return availableBooks;
+    }
 
+    public List<Book> getNotAvailableBook(){
+        List<Book> notAvailableBooks = new ArrayList<>();
+
+        for(Book book : parser.getBookList()){
+            if (!book.isIsAvailable())
+                notAvailableBooks.add(book);
+        }
+        return notAvailableBooks;
     }
 
 }
