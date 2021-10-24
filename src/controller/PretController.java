@@ -119,6 +119,7 @@ public class PretController {
 
             Parser.setMemberList(members);
             workTab.getWorkController().parser.updateMembreXML(members);
+            workTab.getWorkController().parser.updateWorkXML(workTab.getWorkController().getParser().workList);
 
         //    workTab.updateList();
 
@@ -168,6 +169,7 @@ public class PretController {
                             member1.setHasBorrowed(false);
                         }
                         workTab.getWorkController().getParser().updateMembreXML(workController.parser.getMemberList());
+                        workTab.getWorkController().parser.updateWorkXML(workTab.getWorkController().getParser().workList);
                     }
                 }
             }
