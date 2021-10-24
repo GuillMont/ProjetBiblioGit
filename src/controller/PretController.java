@@ -155,7 +155,7 @@ public class PretController {
 
             for(Book book : memberBook){
                 book.setAvailable(true);
-                Parser.setBook(book);
+                Parser.setBookAvailable(book);
             }
 
 
