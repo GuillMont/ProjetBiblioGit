@@ -1,24 +1,22 @@
 package view;
 
-import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
-import com.sun.org.apache.xpath.internal.operations.Bool;
+
+import controller.PretController;
 import controller.WorkController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.VBox;
-import javafx.util.Callback;
 import model.Book;
-import model.Member;
 import model.Work;
 
-import java.util.Observable;
+
+import java.util.Optional;
 
 public class WorkTab {
 
-    private static WorkController workController;
+    public static WorkController workController;
     public VBox vBoxWork;
     public static TreeTableView<Object> tableWork;
 
@@ -29,12 +27,11 @@ public class WorkTab {
         /**Création du bouton d'ajout d'oeuvre*/
         Button buttonAddWork = new Button("Ajouter une oeuvre");
 
-        /**Création du bouton de validation de recherche*/
-        Button buttonResearch = new Button("Rechercher");
+        Button buttonAddBooks = new Button("Ajouter des livres");
 
-        /**Création du bouton de validation de recherche*/
-        Button buttonDeleteResearch = new Button("Annuler la recherche");
+        Button buttonPret = new Button("Pret");
 
+        Button buttonRenduPret = new Button("Rendre un livre");
 
         /**Création des colonnes du tableau*/
         tableWork = new TreeTableView<>();
@@ -45,7 +42,7 @@ public class WorkTab {
         final TreeTableColumn<Object, String> dateColumn = new TreeTableColumn<>("Date de parution");
         final TreeTableColumn<Object, String> purchaseDate = new TreeTableColumn<>("Date d'achat");
         final TreeTableColumn<Object, Boolean> hasBorrowedColumn = new TreeTableColumn<>("Disponible");
-        final TreeTableColumn<Object, Void> pretColumn = new TreeTableColumn<>("Preter");
+
 
         /**Définit le remplissage des colonnes*/
         titleColumn.setCellValueFactory(new TreeItemPropertyValueFactory<>("title"));
@@ -56,42 +53,8 @@ public class WorkTab {
 
         /** Définit l'affichage du tableau */
         tableWork.setColumnResizePolicy(TreeTableView.CONSTRAINED_RESIZE_POLICY);
-        tableWork.getColumns().setAll(titleColumn, authorColumn, dateColumn, purchaseDate, hasBorrowedColumn, pretColumn);
+        tableWork.getColumns().setAll(titleColumn, authorColumn, dateColumn, purchaseDate, hasBorrowedColumn);
         tableWork.setStyle("-fx-selection-bar: #b0e9ff;");
-
-        Callback<TreeTableColumn<Object, Void>, TreeTableCell<Object, Void>> cellFactory = new Callback<TreeTableColumn<Object, Void>, TreeTableCell<Object, Void>>() {
-            @Override
-            public TreeTableCell<Object, Void> call(final TreeTableColumn<Object, Void> param) {
-                final TreeTableCell<Object, Void> cell = new TreeTableCell<Object, Void>() {
-
-                    private final Button btn = new Button("Preter");
-
-                    {
-                        btn.setOnAction((ActionEvent event) -> {
-//
-//                            Object data = getTreeTableView().getRoot().getParent().getChildren().get(getIndex());//getTableView().getItems().get(getIndex());
-                            System.out.println(getIndex());
-                            System.out.println(param.getCellObservableValue(getIndex())
-                            );
-                        });
-                    }
-
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(btn);
-                        }
-                    }
-                };
-                return cell;
-            }
-        };
-        pretColumn.setCellFactory(cellFactory);
-
-
             hasBorrowedColumn.setCellFactory(column -> {
             return new TreeTableCell<Object, Boolean>() {
                 @Override
@@ -108,15 +71,77 @@ public class WorkTab {
             };
         });
 
+        vBoxWork.getChildren().addAll(buttonAddWork, buttonAddBooks,buttonPret, buttonRenduPret, tableWork);
         updateList();
 
-        vBoxWork.getChildren().addAll(buttonAddWork, buttonResearch, buttonDeleteResearch, tableWork);
+        /*** Faire un pret ***/
+        buttonPret.setOnMouseClicked(e->{
 
-        /*** TO DO ***/
-        // Ajouter les fonctions des boutons
+            new PretController(workController.getAvailableBook(),workController.parser.memberList,this);
+        });
+
+        /*** Rendre un livre ***/
+        buttonRenduPret.setOnMouseClicked(e->{
+            new PretController(workController.getNotAvailableBook(),this);
+        });
+
+        /**Ajout de livres**/
+
+        buttonAddBooks.setOnMouseClicked(e->{
+            if(tableWork.getSelectionModel().getSelectedItem()==null){
+               new Alert(Alert.AlertType.ERROR,"Vous devez sélectionner une oeuvre").show();
+            }
+            else{
+                if(tableWork.getSelectionModel().getSelectedItem().getValue() instanceof Work){
+                    Work work = (Work) tableWork.getSelectionModel().getSelectedItem().getValue();
+                    TextInputDialog bookNumber = new TextInputDialog();
+                    bookNumber.setHeaderText("Nombre de livres à ajouter:");
+                    Optional<String> numberRead = bookNumber.showAndWait();
+
+                    TextInputDialog bookDate = new TextInputDialog();
+                    bookDate.setHeaderText("Date d'achat :");
+                    Optional<String> dateRead = bookDate.showAndWait();
+
+                    if (!numberRead.get().isEmpty() && !dateRead.get().isEmpty()) {
+                        for(int i=0; i<Integer.parseInt(numberRead.get());i++){
+                            this.workController.parser.bookList.add(new Book(workController.parser.lastWorkBook+1,dateRead.get(),false,work));
+                            workController.parser.lastWorkBook++;
+                        }
+                        workController.parser.updateWorkXML(workController.getWorks());
+                        updateList();
+                    }
+                }
+                else  new Alert(Alert.AlertType.ERROR,"Vous devez sélectionner une oeuvre").show();
+
+            }
+        });
+
+        /** Ajout d'un membre */
+        buttonAddWork.setOnMouseClicked(e ->
+        {
+            TextInputDialog title = new TextInputDialog();
+            title.setHeaderText("Entrez le nom du livre");
+            Optional<String> titleRead = title.showAndWait();
+
+            TextInputDialog author = new TextInputDialog();
+            author.setHeaderText("Entrez un auteur.");
+            Optional<String> authorRead = author.showAndWait();
+
+            TextInputDialog date = new TextInputDialog();
+            date.setHeaderText("Entrez la date de parution du livre.");
+            Optional<String> dateRead = date.showAndWait();
+
+            if (!titleRead.get().isEmpty() && !authorRead.get().isEmpty() && !dateRead.get().isEmpty()) {
+                workController.addWork(new Work(titleRead.get(), authorRead.get(), dateRead.get()));
+                updateList();
+            }
+        });
+
+
     }
 
-    private void updateList() {
+    public void updateList() {
+        System.out.println("Update list works");
         ObservableList<Work> workList = FXCollections.observableArrayList(workController.getWorks());
         TreeItem<Object> main = new TreeItem<>();
         for(Work work : workList){
@@ -130,14 +155,15 @@ public class WorkTab {
 
         }
         tableWork.setRoot(main);
-
-
-
-
-
     }
+
+
 
     public VBox getvBoxWork() {
         return vBoxWork;
+    }
+
+    public WorkController getWorkController(){
+        return workController;
     }
 }

@@ -1,26 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Membres>
-    <Membre id="0">
+    <Membre>
         <FirstName>Laura</FirstName>
         <LastName>Jeanneton</LastName>
         <Mail>laura.jeanneton@etu.univ-amu.fr</Mail>
-        <Books>
-            <Book id="7"/>
-            <Book id="20"/>
-        </Books>
     </Membre>
-    <Membre id="1">
+    <Membre>
         <FirstName>Nicolas</FirstName>
         <LastName>Cauet</LastName>
         <Mail>nicolas.cauet@etu.univ-amu.fr</Mail>
-        <Books>
-            <Book id="2"/>
-        </Books>
     </Membre>
-    <Membre id="2">
+    <Membre>
         <FirstName>Guillaume</FirstName>
         <LastName>Montagner</LastName>
         <Mail>guillaume.montagner@etu.univ-amu.fr</Mail>
-        <Books/>
     </Membre>
 </Membres>

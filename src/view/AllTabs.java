@@ -1,6 +1,7 @@
 package view;
 
 import controller.MemberController;
+import controller.Parser;
 import controller.WorkController;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
@@ -15,9 +16,10 @@ public class AllTabs {
     }
 
     public void init() {
+        Parser parser = new Parser();
         /** Parser XML **/
-        MemberController memberController = new MemberController();
-        WorkController workController = new WorkController();
+        MemberController memberController = new MemberController(parser);
+        WorkController workController = new WorkController(parser);
 
         /*** Onglet des oeuvres ***/
         WorkTab workTab = new WorkTab(workController);

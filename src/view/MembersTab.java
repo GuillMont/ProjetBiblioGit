@@ -21,6 +21,8 @@ public class MembersTab {
         this.memberController = memberController;
         Button buttonAddAdherent = new Button("Ajouter un adherent");
 
+        Button buttonRemoveAdherent = new Button("Supprimer un adhérent");
+
         /** Création des colonnes du tableau */
         tableAdherent = new TableView();
         final TableColumn<Member, String> firstNameColumn = new TableColumn<>("Prénom");
@@ -49,11 +51,15 @@ public class MembersTab {
                         setStyle("");
                     else if (item.booleanValue() == false)
                         setStyle("-fx-background-color: #ff3d35");
-                    else
+                    else{
+                        System.out.println("set color member");
                         setStyle("-fx-background-color: #49ff4f");
+                    }
+
                 }
             };
         });
+
 
         /** Définit l'affichage du tableau */
         tableAdherent.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -61,7 +67,23 @@ public class MembersTab {
         tableAdherent.getColumns().setAll(informationsAdherentColumn,hasBorrowedColumn);
         tableAdherent.setStyle("-fx-selection-bar: #b0e9ff;");
 
-        vBoxAdherent.getChildren().addAll(buttonAddAdherent, tableAdherent);
+        buttonRemoveAdherent.setOnMouseClicked(e->{
+            if(tableAdherent.getSelectionModel().getSelectedCells().size()>0){
+                System.out.println(tableAdherent.getSelectionModel().getSelectedCells().toString());
+                Member member = tableAdherent.getSelectionModel().getSelectedItem();
+                if(member.isHasBorrowed()){
+                    new Alert(Alert.AlertType.ERROR,"Impossible de supprimer le membre : des prets sont en cours").show();
+                }
+                else{
+                    memberController.getMembers().remove(member);
+                    updateList();
+                    memberController.getParser().getMemberList().remove(member);
+                    memberController.getParser().updateMembreXML(memberController.getMembers());
+                }
+            }
+        });
+
+        vBoxAdherent.getChildren().addAll(buttonAddAdherent,buttonRemoveAdherent, tableAdherent);
 
         /** Ajout d'un membre */
         buttonAddAdherent.setOnMouseClicked(e ->
@@ -78,7 +100,9 @@ public class MembersTab {
                     TextInputDialog adresse = new TextInputDialog();
                     adresse.setHeaderText("Entrez l'adresse.");
                     Optional<String> adresseLue = adresse.showAndWait();
-                    memberController.addMember(new Member(prenomLu.get(), nomLu.get(), adresseLue.get()));
+                    memberController.addMember(new Member(memberController.getParser().lastMember,prenomLu.get(), nomLu.get(), adresseLue.get()));
+                    System.out.println("last member : " + memberController.getParser().lastMember);
+                    memberController.getParser().lastMember++;
                     updateList();
                     }
                 }
@@ -86,6 +110,7 @@ public class MembersTab {
     }
 
     public static void updateList(){
+        System.out.println("Update list members");
         ObservableList<Member> membersList = FXCollections.observableArrayList(memberController.getMembers());
         tableAdherent.setItems(membersList);
     }
