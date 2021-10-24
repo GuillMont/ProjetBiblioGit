@@ -183,6 +183,63 @@ public class Parser {
     }
 
     public void updateWorkXML(List<Work> works){
+        try {
+            int countWork = 1;
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+            //root elements
+            Document doc = docBuilder.newDocument();
+            doc.setXmlVersion("1.0");
+            Element rootElement = doc.createElement("Works");
+            doc.appendChild(rootElement);
+
+            for(Work work: works){
+                Element workBalise = doc.createElement("Work");
+                workBalise.setAttribute("id", countWork + "");
+
+                Element author = doc.createElement("Author");
+                author.appendChild(doc.createTextNode(work.getAuthor()));
+                workBalise.appendChild(author);
+
+                Element title = doc.createElement("Title");
+                title.appendChild(doc.createTextNode(work.getTitle()));
+                workBalise.appendChild(title);
+
+                Element date = doc.createElement("Date");
+                date.appendChild(doc.createTextNode(String.valueOf(work.getDate())));
+                workBalise.appendChild(date);
+
+                /*** Remplir les infos des livres quand on aura implémenté la fonction d'ajouter un livre a une oeuvre ***/
+                Element booksBalise = doc.createElement("Books");
+
+                Element book = doc.createElement("Book");
+                booksBalise.appendChild(book);
+
+                Element purchaseDate = doc.createElement("PurchaseDate");
+                book.appendChild(purchaseDate);
+
+                Element isAvailable = doc.createElement("IsAivailable");
+                book.appendChild(isAvailable);
+
+                workBalise.appendChild(booksBalise);
+                rootElement.appendChild(workBalise);
+                countWork ++;
+            }
+
+            TransformerFactory transformerFactory =  TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+            DOMSource source = new DOMSource(doc);
+
+            StreamResult result =  new StreamResult(new File(dataWorkAndBook_pathName));
+            transformer.transform(source, result);
+
+
+        }catch(ParserConfigurationException | TransformerException pce){
+            pce.printStackTrace();
+        }
     }
 
     public List<Work> getWorkList() {

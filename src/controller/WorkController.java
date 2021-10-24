@@ -22,6 +22,7 @@ public class WorkController {
 
     public void addWork(Work work){
         works.add(work);
+        parser.updateWorkXML(works);
     }
 
     /*** Getter & Setter ***/
