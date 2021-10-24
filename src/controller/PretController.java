@@ -81,6 +81,7 @@ public class PretController {
 
     public void initMembre(){
         VBox box = new VBox();
+        System.out.println(this.members.size()+ "MEMEBER SIZE");
         for(Member member : this.members){
             RadioButton button1 = new RadioButton(member.getFirstName()+" "+member.getLastName());
 
@@ -117,7 +118,7 @@ public class PretController {
             if(member.getBorrowedBooks().size()>0) member.setHasBorrowed(true);
 
             Parser.setMemberList(members);
-            workController.parser.updateMembreXML(members);
+            workTab.getWorkController().parser.updateMembreXML(members);
 
         //    workTab.updateList();
 
@@ -145,6 +146,7 @@ public class PretController {
     }
 
     public void initRenduButton(){
+        System.out.println(workTab.getWorkController().getParser().getMemberList());
         Button rendre = new Button("Rendre le livre");
         rendre.setOnMouseClicked(e->{
 
@@ -159,7 +161,17 @@ public class PretController {
             for(Book book : memberBook){
                 book.setAvailable(true);
                 Parser.setBookAvailable(book);
+                for(Member member1 : workTab.getWorkController().getParser().getMemberList()){
+                    if(member1.getBorrowedBooks().contains(book)){
+                        member1.getBorrowedBooks().remove(book);
+                        if(member1.getBorrowedBooks().size()<=0){
+                            member1.setHasBorrowed(false);
+                        }
+                        workTab.getWorkController().getParser().updateMembreXML(workController.parser.getMemberList());
+                    }
+                }
             }
+
 
 
             stage.close();

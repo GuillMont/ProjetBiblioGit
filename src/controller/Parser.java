@@ -41,6 +41,7 @@ public class Parser {
     }
 
     public Parser(){
+       System.out.println("Cosntruct");
         dataWorkAndBook_pathName = "src/datas/workAndBook.xml";
         dataMember_pathName = "src/datas/member.xml";
         try {
@@ -174,8 +175,10 @@ public class Parser {
                     System.out.println(member.getBorrowedBooks());
                 }
                 memberList.add(member);
+
             }
         }
+        System.out.println("Size : "+ memberList.size());
     }
 
     public void updateMembreXML(List<Member> membres){

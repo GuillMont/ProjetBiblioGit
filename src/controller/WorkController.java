@@ -11,9 +11,9 @@ public class WorkController {
     private List<Work> works;
     public Parser parser;
 
-    public WorkController() {
+    public WorkController(Parser parser) {
         works = new ArrayList<>();
-        parser = new Parser();
+        this.parser=parser;
         populate();
     }
 

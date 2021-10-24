@@ -162,4 +162,8 @@ public class WorkTab {
     public VBox getvBoxWork() {
         return vBoxWork;
     }
+
+    public WorkController getWorkController(){
+        return workController;
+    }
 }
