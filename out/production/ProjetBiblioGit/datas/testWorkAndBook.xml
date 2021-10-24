@@ -1,0 +1,36 @@
+<Works>
+    <Work id="1">
+        <Author>Victor Hugo</Author>
+        <Title>Les Miserables</Title>
+        <Date>01/01/1862</Date>
+        <Books>
+            <Book id="11">
+                <PurchaseDate>12/06/2021</PurchaseDate>
+                <IsAvailable>false</IsAvailable>
+            </Book>
+            <Book id="12">
+                <PurchaseDate>12/06/2021</PurchaseDate>
+                <IsAvailable>true</IsAvailable>
+            </Book>
+            <Book id="13">
+                <PurchaseDate>20/10/2021</PurchaseDate>
+                <IsAvailable>true</IsAvailable>
+            </Book>
+        </Books>
+    </Work>
+    <Work id="2">
+        <Title>A la recherche du temps perdu</Title>
+        <Author>Marcel Proust</Author>
+        <Date>01/01/1913</Date>
+        <Books>
+            <Book id="21">
+                <PurchaseDate>06/05/2008</PurchaseDate>
+                <IsAvailable>true</IsAvailable>
+            </Book>
+            <Book id="22">
+                <PurchaseDate>06/05/2008</PurchaseDate>
+                <IsAvailable>true</IsAvailable>
+            </Book>
+        </Books>
+    </Work>
+</Works>

@@ -42,8 +42,6 @@ public class Book {
         this.purchaseDate = purchaseDate;
     }
 
-
-
     public Work getWork() {
         return work;
     }

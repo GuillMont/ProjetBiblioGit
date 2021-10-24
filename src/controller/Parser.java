@@ -22,15 +22,20 @@ import java.util.List;
 
 public class Parser {
 
-    public List<Work> workList = new ArrayList<Work>();
-    public List<Book> bookList = new ArrayList<Book>();
+    public List<Work> workList = new ArrayList<>();
+    public List<Book> bookList = new ArrayList<>();
     public List<Member> memberList = new ArrayList<>();
     Document document;
+    String dataWorkAndBook_pathName;
+    String dataMember_pathName;
+
 
     public Parser(){
+        dataWorkAndBook_pathName = "src/datas/workAndBook.xml";
+        dataMember_pathName = "src/datas/member.xml";
         try {
-            parseWorks();
-            parserMembre();
+            parseWorks(dataWorkAndBook_pathName);
+            parserMember(dataMember_pathName);
 
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
@@ -41,11 +46,27 @@ public class Parser {
         }
     }
 
-    public void parseWorks() throws ParserConfigurationException, IOException, SAXException {
+    public Parser(String dataWorkAndBook_pathName, String dataMember_pathName){
+        this.dataWorkAndBook_pathName = dataWorkAndBook_pathName;
+        this.dataMember_pathName = dataMember_pathName;
+        try {
+            parseWorks(dataWorkAndBook_pathName);
+            parserMember(dataMember_pathName);
+
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void parseWorks(String pathname) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
 
-        document = builder.parse(new File("src/datas/workAndBook.xml"));
+        document = builder.parse(new File(pathname));
 
         NodeList nodeList = document.getDocumentElement().getChildNodes();
         for (int i = 0; i < nodeList.getLength(); i++) {
@@ -68,10 +89,7 @@ public class Parser {
                 this.parserBook(work,elem);
             }
 
-        }/*
-        for(Book book : this.livres)
-            System.out.println(book.toString());
-        System.out.println(livres.size());*/
+        }
     }
 
     public void parserBook(Work work, Element elem){
@@ -93,11 +111,11 @@ public class Parser {
         }
     }
 
-    public void parserMembre() throws ParserConfigurationException, IOException, SAXException {
+    public void parserMember(String pathname) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
 
-        document = builder.parse(new File("src/datas/membre.xml"));
+        document = builder.parse(new File(pathname));
 
         NodeList nodeList = document.getDocumentElement().getChildNodes();
         for (int i = 0; i < nodeList.getLength(); i++) {
@@ -118,10 +136,6 @@ public class Parser {
                 Member member = new Member(firstName, lastName, mail);
                 memberList.add(member);
             }
-
-        }
-        for(Member member : memberList){
-            System.out.println(member.toString());
         }
     }
 
@@ -159,12 +173,24 @@ public class Parser {
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
             DOMSource source = new DOMSource(doc);
 
-            StreamResult result =  new StreamResult(new File("src/datas/membre.xml"));
+            StreamResult result =  new StreamResult(new File("src/datas/member.xml"));
             transformer.transform(source, result);
 
 
         }catch(ParserConfigurationException | TransformerException pce){
             pce.printStackTrace();
         }
+    }
+
+    public List<Work> getWorkList() {
+        return workList;
+    }
+
+    public List<Book> getBookList() {
+        return bookList;
+    }
+
+    public List<Member> getMemberList() {
+        return memberList;
     }
 }

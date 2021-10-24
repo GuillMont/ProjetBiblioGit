@@ -21,16 +21,8 @@ public class Main extends Application {
         /** Parser XML **/
         Parser parser = new Parser();
 
-        /** Test controller */
         MemberController memberController = new MemberController();
-        memberController.setParser(parser);
-        memberController.populate();
-       // System.out.println(memberController.getMembers().size());
-
         WorkController workController = new WorkController();
-        workController.setParser(parser);
-        workController.populate();
-        //System.out.println("Nombre d'oeuvres : " + workController.getWorks().size());
 
         /*** Onglet des Oeuvres ***/
         WorkTab workTab = new WorkTab(workController);
