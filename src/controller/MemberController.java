@@ -13,7 +13,6 @@ public class MemberController {
 
     public MemberController(){
         members = new ArrayList<>();
-        populate();
     }
 
     public List<Member> getMembers(){
@@ -22,10 +21,11 @@ public class MemberController {
 
     public void populate(){
 
-        Member member1 = new Member("Jean-Luc", "Massat", "jean-luc.massat@univ-amu.fr");
+        /*Member member1 = new Member("Jean-Luc", "Massat", "jean-luc.massat@univ-amu.fr");
         Member member2 = new Member("Nicolas", "Hoarau", "nicolas-hoarau@univ-amu.fr");
         Member member3 = new Member("Noel", "Novelli", "noel-novelli@univ-amu.fr");
-        members.addAll(Arrays.asList(member1, member2, member3));
+        members.addAll(Arrays.asList(member1, member2, member3));*/
+        members.addAll(parser.memberList);
     }
 
     public void addMember(Member member){

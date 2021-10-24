@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Membres>
+    <Membre>
+        <FirstName>Laura</FirstName>
+        <LastName>Jeanneton</LastName>
+        <Mail>laura.jeanneton@etu.univ-amu.fr</Mail>
+    </Membre>
+    <Membre>
+        <FirstName>Nicolas</FirstName>
+        <LastName>Cauet</LastName>
+        <Mail>nicolas.cauet@etu.univ-amu.fr</Mail>
+    </Membre>
+    <Membre>
+        <FirstName>Guillaume</FirstName>
+        <LastName>Montagner</LastName>
+        <Mail>guillaume.montagner@etu.univ-amu.fr</Mail>
+    </Membre>
+</Membres>

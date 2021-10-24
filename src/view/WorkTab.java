@@ -1,20 +1,13 @@
 package view;
 
 import controller.WorkController;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import model.Book;
-import model.Member;
 import model.Work;
-import sun.reflect.generics.tree.Tree;
-
-import javax.swing.event.ChangeListener;
 
 public class WorkTab {
 
@@ -74,7 +67,7 @@ public class WorkTab {
         TreeItem<Object> main = new TreeItem<>();
         for(Work work : workList){
             TreeItem<Object> itemWork = new TreeItem<>(work);
-            for(Book book : work.getBooks(workController.parser.livres)){
+            for(Book book : work.getBooks(workController.parser.bookList)){
                 TreeItem<Object> itemBook = new TreeItem<>(book);
                 itemWork.getChildren().add(itemBook);
             }

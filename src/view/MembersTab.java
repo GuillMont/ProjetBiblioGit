@@ -12,13 +12,13 @@ import java.util.Optional;
 
 public class MembersTab {
 
-    private static MemberController memberController = new MemberController();
+    private static MemberController memberController;
     public VBox vBoxAdherent;
     public static TableView<Member> tableAdherent;
 
-    public MembersTab() {
+    public MembersTab(MemberController memberController) {
         vBoxAdherent = new VBox(); //contient l'ensemble des objets de l'onglet (bouton/tableau)
-
+        this.memberController = memberController;
         Button buttonAddAdherent = new Button("Ajouter un adherent");
 
         /** Création des colonnes du tableau */

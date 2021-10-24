@@ -58,4 +58,8 @@ public class Member {
     public void setHasBorrowed(boolean hasBorrowed) {
         this.hasBorrowed = hasBorrowed;
     }
+
+    public String toString(){
+        return firstName+" "+lastName+" ("+mail+")";
+    }
 }

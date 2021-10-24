@@ -1,6 +1,7 @@
 package controller;
 
 import model.Book;
+import model.Member;
 import model.Work;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -19,12 +20,15 @@ import java.util.List;
 public class Parser {
 
     public List<Work> workList = new ArrayList<Work>();
-    public  List<Book> livres = new ArrayList<Book>();
+    public List<Book> bookList = new ArrayList<Book>();
+    public List<Member> memberList = new ArrayList<>();
     Document document;
 
     public Parser(){
         try {
             parseWorks();
+            parserMembre();
+
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -81,8 +85,40 @@ public class Parser {
             boolean isAvailable = Boolean.parseBoolean(bookElement.getElementsByTagName("IsAvailable").item(0).getChildNodes().item(0).getNodeValue());
 
             Book book = new Book(id,purchaseDate,isAvailable,work);
-            this.livres.add(book);
+            this.bookList.add(book);
 
+        }
+    }
+
+    public void parserMembre() throws ParserConfigurationException, IOException, SAXException {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+
+        document = builder.parse(new File("src/datas/membre.xml"));
+
+        NodeList nodeList = document.getDocumentElement().getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node node = nodeList.item(i);
+
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                Element elem = (Element) node;
+
+                String firstName = elem.getElementsByTagName("FirstName")
+                        .item(0).getChildNodes().item(0).getNodeValue();
+
+                // Get the value of all sub-elements.
+                String lastName = elem.getElementsByTagName("LastName")
+                        .item(0).getChildNodes().item(0).getNodeValue();
+
+                String mail = elem.getElementsByTagName("Mail").item(0)
+                        .getChildNodes().item(0).getNodeValue();
+                Member member = new Member(firstName, lastName, mail);
+                memberList.add(member);
+            }
+
+        }
+        for(Member member : memberList){
+            System.out.println(member.toString());
         }
     }
 }

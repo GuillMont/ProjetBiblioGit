@@ -24,6 +24,7 @@ public class Main extends Application {
         /** Test controller */
         MemberController memberController = new MemberController();
         memberController.setParser(parser);
+        memberController.populate();
        // System.out.println(memberController.getMembers().size());
 
         WorkController workController = new WorkController();
@@ -36,7 +37,7 @@ public class Main extends Application {
         VBox vBoxWork = workTab.getvBoxWork();
 
         /*** Onglet des Membres ***/
-        MembersTab membersTab = new MembersTab();
+        MembersTab membersTab = new MembersTab(memberController);
         VBox vBoxMembre = membersTab.getvBoxAdherent();
 
         /*** Ensemble des onglets ***/
