@@ -1,5 +1,6 @@
 package view;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import controller.WorkController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,7 +8,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.VBox;
 import model.Book;
+import model.Member;
 import model.Work;
+
+import java.util.Observable;
 
 public class WorkTab {
 
@@ -37,7 +41,7 @@ public class WorkTab {
         final TreeTableColumn<Object, String> authorColumn = new TreeTableColumn<>("Auteur");
         final TreeTableColumn<Object, String> dateColumn = new TreeTableColumn<>("Date de parution");
         final TreeTableColumn<Object, String> purchaseDate = new TreeTableColumn<>("Date d'achat");
-        final TreeTableColumn<Object, String> hasBorrowedColumn = new TreeTableColumn<>("Disponible");
+        final TreeTableColumn<Object, Boolean> hasBorrowedColumn = new TreeTableColumn<>("Disponible");
 
 
         /**Définit le remplissage des colonnes*/
@@ -45,14 +49,28 @@ public class WorkTab {
         authorColumn.setCellValueFactory(new TreeItemPropertyValueFactory<>("author"));
         dateColumn.setCellValueFactory(new TreeItemPropertyValueFactory<>("date"));
         purchaseDate.setCellValueFactory(new TreeItemPropertyValueFactory<>("purchaseDate"));
-        hasBorrowedColumn.setCellValueFactory(new TreeItemPropertyValueFactory<>("isAvailable"));
+        hasBorrowedColumn.setCellValueFactory(new TreeItemPropertyValueFactory<Object, Boolean>("isAvailable"));
 
         /** Définit l'affichage du tableau */
         tableWork.setColumnResizePolicy(TreeTableView.CONSTRAINED_RESIZE_POLICY);
         tableWork.getColumns().setAll(titleColumn, authorColumn, dateColumn,purchaseDate,hasBorrowedColumn);
         tableWork.setStyle("-fx-selection-bar: #b0e9ff;");
 
+        hasBorrowedColumn.setCellFactory(column -> {
+            return new TreeTableCell<Object, Boolean>() {
+                @Override
+                protected void updateItem(Boolean item, boolean empty) {
+                    super.updateItem(item, empty);
+                                if (item == null)
+                                    setStyle("");
+                                else if (item.booleanValue() == false)
+                                    setStyle("-fx-background-color: #ff3d35");
+                                else
+                                    setStyle("-fx-background-color: #49ff4f");
 
+                }
+            };
+        });
 
         updateList();
 

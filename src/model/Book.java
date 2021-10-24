@@ -7,6 +7,15 @@ public class Book {
 
     public int id;
     public String purchaseDate;
+
+    public boolean isIsAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
+    }
+
     public boolean isAvailable;
     public Work work;
 
@@ -33,13 +42,7 @@ public class Book {
         this.purchaseDate = purchaseDate;
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
-    }
 
-    public void setAvailable(boolean available) {
-        isAvailable = available;
-    }
 
     public Work getWork() {
         return work;
