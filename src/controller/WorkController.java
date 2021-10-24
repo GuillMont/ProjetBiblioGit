@@ -1,5 +1,6 @@
 package controller;
 
+import model.Book;
 import model.Work;
 
 import java.util.ArrayList;
@@ -40,6 +41,17 @@ public class WorkController {
 
     public void setParser(Parser parser) {
         this.parser = parser;
+    }
+
+    public List<Book> getAvailableBook(){
+        List<Book> availableBooks = new ArrayList<>();
+
+        for(Book book : parser.getBookList()){
+            if (book.isIsAvailable())
+                availableBooks.add(book);
+        }
+        return availableBooks;
+
     }
 
 }

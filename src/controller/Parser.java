@@ -23,12 +23,20 @@ import java.util.List;
 public class Parser {
 
     public List<Work> workList = new ArrayList<>();
-    public List<Book> bookList = new ArrayList<>();
-    public List<Member> memberList = new ArrayList<>();
+    public static List<Book> bookList = new ArrayList<>();
+    public static List<Member> memberList = new ArrayList<>();
     Document document;
     String dataWorkAndBook_pathName;
     String dataMember_pathName;
+   public int lastWorkBook = 0;
 
+   public static void setBookList(List<Book> books){
+        bookList=books;
+   }
+
+    public static void setMemberList(List<Member> members){
+        memberList=members;
+    }
 
     public Parser(){
         dataWorkAndBook_pathName = "src/datas/workAndBook.xml";
@@ -102,6 +110,7 @@ public class Parser {
             Element bookElement = (Element) bookNode;
 
             int id= Integer.parseInt(bookElement.getAttribute("id"));
+            this.lastWorkBook=id;
             String purchaseDate = bookElement.getElementsByTagName("PurchaseDate").item(0).getChildNodes().item(0).getNodeValue();
             boolean isAvailable = Boolean.parseBoolean(bookElement.getElementsByTagName("IsAvailable").item(0).getChildNodes().item(0).getNodeValue());
 
@@ -229,7 +238,7 @@ public class Parser {
                 }
                 workBalise.appendChild(booksBalise);
                 rootElement.appendChild(workBalise);
-
+                this.lastWorkBook=countWork;
 
 
 
@@ -254,11 +263,23 @@ public class Parser {
         return workList;
     }
 
-    public List<Book> getBookList() {
+    public static List<Book> getBookList() {
         return bookList;
     }
 
     public List<Member> getMemberList() {
         return memberList;
+    }
+
+    public static void setBook(Book book){
+      for(Book books : bookList){
+        if(book.getId()==books.getId()){
+            System.out.print("SET BOOK : " + book.isIsAvailable() + " TO " + book);
+            books.setAvailable(false);
+            System.out.print("SET BOOK : " + book.isIsAvailable() + " TO " + book);
+        }
+
+      }
+
     }
 }

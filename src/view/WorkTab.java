@@ -1,13 +1,18 @@
 package view;
 
 
+import controller.PretController;
 import controller.WorkController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Book;
 import model.Work;
@@ -28,6 +33,10 @@ public class WorkTab {
         /**Création du bouton d'ajout d'oeuvre*/
         Button buttonAddWork = new Button("Ajouter une oeuvre");
 
+        Button buttonAddBooks = new Button("Ajouter des livres");
+
+        Button buttonPret = new Button("Pret");
+
         /**Création des colonnes du tableau*/
         tableWork = new TreeTableView<>();
         tableWork.setShowRoot(false
@@ -37,7 +46,7 @@ public class WorkTab {
         final TreeTableColumn<Object, String> dateColumn = new TreeTableColumn<>("Date de parution");
         final TreeTableColumn<Object, String> purchaseDate = new TreeTableColumn<>("Date d'achat");
         final TreeTableColumn<Object, Boolean> hasBorrowedColumn = new TreeTableColumn<>("Disponible");
-        final TreeTableColumn<Object, Void> pretColumn = new TreeTableColumn<>("Preter");
+
 
         /**Définit le remplissage des colonnes*/
         titleColumn.setCellValueFactory(new TreeItemPropertyValueFactory<>("title"));
@@ -48,43 +57,8 @@ public class WorkTab {
 
         /** Définit l'affichage du tableau */
         tableWork.setColumnResizePolicy(TreeTableView.CONSTRAINED_RESIZE_POLICY);
-        tableWork.getColumns().setAll(titleColumn, authorColumn, dateColumn, purchaseDate, hasBorrowedColumn, pretColumn);
+        tableWork.getColumns().setAll(titleColumn, authorColumn, dateColumn, purchaseDate, hasBorrowedColumn);
         tableWork.setStyle("-fx-selection-bar: #b0e9ff;");
-
-        Callback<TreeTableColumn<Object, Void>, TreeTableCell<Object, Void>> cellFactory = new Callback<TreeTableColumn<Object, Void>, TreeTableCell<Object, Void>>() {
-            @Override
-            public TreeTableCell<Object, Void> call(final TreeTableColumn<Object, Void> param) {
-                final TreeTableCell<Object, Void> cell = new TreeTableCell<Object, Void>() {
-
-                    private final Button btn = new Button("Preter");
-
-                    {
-                        btn.setOnAction((ActionEvent event) -> {
-//
-//                            Object data = getTreeTableView().getRoot().getParent().getChildren().get(getIndex());//getTableView().getItems().get(getIndex());
-                            System.out.println(getIndex());
-                            System.out.println(param.getCellObservableValue(getIndex())
-
-                            );
-                        });
-                    }
-
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(btn);
-                        }
-                    }
-                };
-                return cell;
-            }
-        };
-        pretColumn.setCellFactory(cellFactory);
-
-
             hasBorrowedColumn.setCellFactory(column -> {
             return new TreeTableCell<Object, Boolean>() {
                 @Override
@@ -101,9 +75,43 @@ public class WorkTab {
             };
         });
 
-        vBoxWork.getChildren().addAll(buttonAddWork, tableWork);
+        vBoxWork.getChildren().addAll(buttonAddWork, buttonAddBooks,buttonPret, tableWork);
         updateList();
 
+        buttonPret.setOnMouseClicked(e->{
+            new PretController(workController.getAvailableBook(),workController.parser.memberList,this);
+        });
+
+        /**Ajout de livres**/
+
+        buttonAddBooks.setOnMouseClicked(e->{
+            if(tableWork.getSelectionModel().getSelectedItem()==null){
+               new Alert(Alert.AlertType.ERROR,"Vous devez sélectionner une oeuvre").show();
+            }
+            else{
+                if(tableWork.getSelectionModel().getSelectedItem().getValue() instanceof Work){
+                    Work work = (Work) tableWork.getSelectionModel().getSelectedItem().getValue();
+                    TextInputDialog bookNumber = new TextInputDialog();
+                    bookNumber.setHeaderText("Nombre de livres à ajouter:");
+                    Optional<String> numberRead = bookNumber.showAndWait();
+
+                    TextInputDialog bookDate = new TextInputDialog();
+                    bookDate.setHeaderText("Date d'achat :");
+                    Optional<String> dateRead = bookDate.showAndWait();
+
+                    if (!numberRead.get().isEmpty() && !dateRead.get().isEmpty()) {
+                        for(int i=0; i<Integer.parseInt(numberRead.get());i++){
+                            this.workController.parser.bookList.add(new Book(workController.parser.lastWorkBook+1,dateRead.get(),false,work));
+                            workController.parser.lastWorkBook++;
+                        }
+                        workController.parser.updateWorkXML(workController.getWorks());
+                        updateList();
+                    }
+                }
+                else  new Alert(Alert.AlertType.ERROR,"Vous devez sélectionner une oeuvre").show();
+
+            }
+        });
 
         /** Ajout d'un membre */
         buttonAddWork.setOnMouseClicked(e ->
@@ -129,7 +137,8 @@ public class WorkTab {
 
     }
 
-    private void updateList() {
+    public void updateList() {
+        System.out.println("Update list works");
         ObservableList<Work> workList = FXCollections.observableArrayList(workController.getWorks());
         TreeItem<Object> main = new TreeItem<>();
         for(Work work : workList){
@@ -143,7 +152,6 @@ public class WorkTab {
 
         }
         tableWork.setRoot(main);
-
     }
 
 

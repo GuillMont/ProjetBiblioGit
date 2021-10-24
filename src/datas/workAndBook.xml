@@ -17,160 +17,177 @@
                 <PurchaseDate>20/10/2021</PurchaseDate>
                 <IsAvailable>true</IsAvailable>
             </Book>
+            <Book id="5">
+                <PurchaseDate>15-05-2013</PurchaseDate>
+                <IsAvailable>false</IsAvailable>
+            </Book>
         </Books>
     </Work>
-    <Work id="5">
+    <Work id="6">
         <Author>Marcel Proust</Author>
         <Title>A la recherche du temps perdu</Title>
         <Date>01/01/1913</Date>
         <Books>
-            <Book id="6">
+            <Book id="7">
                 <PurchaseDate>06/05/2008</PurchaseDate>
                 <IsAvailable>true</IsAvailable>
             </Book>
-            <Book id="7">
+            <Book id="8">
                 <PurchaseDate>06/05/2008</PurchaseDate>
                 <IsAvailable>true</IsAvailable>
             </Book>
         </Books>
     </Work>
-    <Work id="8">
+    <Work id="9">
         <Author>Lewis Carroll</Author>
         <Title>Alice aux Pays des Merveilles</Title>
         <Date>01/01/1865</Date>
         <Books>
-            <Book id="9">
-                <PurchaseDate>24/06/2018</PurchaseDate>
-                <IsAvailable>false</IsAvailable>
-            </Book>
             <Book id="10">
                 <PurchaseDate>24/06/2018</PurchaseDate>
                 <IsAvailable>false</IsAvailable>
             </Book>
             <Book id="11">
                 <PurchaseDate>24/06/2018</PurchaseDate>
+                <IsAvailable>false</IsAvailable>
+            </Book>
+            <Book id="12">
+                <PurchaseDate>24/06/2018</PurchaseDate>
                 <IsAvailable>true</IsAvailable>
             </Book>
         </Books>
     </Work>
-    <Work id="12">
+    <Work id="13">
         <Author>Jack London</Author>
         <Title>Croc-Blanc</Title>
         <Date>01/01/1906</Date>
         <Books>
-            <Book id="13">
+            <Book id="14">
                 <PurchaseDate>16/08/2019</PurchaseDate>
                 <IsAvailable>false</IsAvailable>
             </Book>
-            <Book id="14">
+            <Book id="15">
                 <PurchaseDate>16/08/2019</PurchaseDate>
                 <IsAvailable>true</IsAvailable>
             </Book>
-            <Book id="15">
+            <Book id="16">
                 <PurchaseDate>20/08/2019</PurchaseDate>
                 <IsAvailable>true</IsAvailable>
             </Book>
         </Books>
     </Work>
-    <Work id="16">
+    <Work id="17">
         <Author>Edmond Rostand</Author>
         <Title>Cyrano de Bergerac</Title>
         <Date>01/01/1897</Date>
         <Books>
-            <Book id="17">
-                <PurchaseDate>20/08/2020</PurchaseDate>
-                <IsAvailable>false</IsAvailable>
-            </Book>
             <Book id="18">
                 <PurchaseDate>20/08/2020</PurchaseDate>
                 <IsAvailable>false</IsAvailable>
             </Book>
             <Book id="19">
                 <PurchaseDate>20/08/2020</PurchaseDate>
+                <IsAvailable>false</IsAvailable>
+            </Book>
+            <Book id="20">
+                <PurchaseDate>20/08/2020</PurchaseDate>
                 <IsAvailable>true</IsAvailable>
             </Book>
         </Books>
     </Work>
-    <Work id="20">
+    <Work id="21">
         <Author>Bram Stoker</Author>
         <Title>Dracula</Title>
         <Date>01/01/1897</Date>
         <Books>
-            <Book id="21">
-                <PurchaseDate>20/07/2021</PurchaseDate>
-                <IsAvailable>false</IsAvailable>
-            </Book>
             <Book id="22">
                 <PurchaseDate>20/07/2021</PurchaseDate>
-                <IsAvailable>true</IsAvailable>
+                <IsAvailable>false</IsAvailable>
             </Book>
             <Book id="23">
                 <PurchaseDate>20/07/2021</PurchaseDate>
                 <IsAvailable>true</IsAvailable>
             </Book>
+            <Book id="24">
+                <PurchaseDate>20/07/2021</PurchaseDate>
+                <IsAvailable>true</IsAvailable>
+            </Book>
+            <Book id="25">
+                <PurchaseDate>15-05-2013</PurchaseDate>
+                <IsAvailable>false</IsAvailable>
+            </Book>
         </Books>
     </Work>
-    <Work id="24">
+    <Work id="26">
         <Author>Mary Shelley</Author>
         <Title>Frankenstein</Title>
         <Date>01/01/1797</Date>
         <Books>
-            <Book id="25">
-                <PurchaseDate>25/02/2020</PurchaseDate>
-                <IsAvailable>true</IsAvailable>
-            </Book>
-            <Book id="26">
-                <PurchaseDate>25/02/2020</PurchaseDate>
-                <IsAvailable>true</IsAvailable>
-            </Book>
             <Book id="27">
                 <PurchaseDate>25/02/2020</PurchaseDate>
                 <IsAvailable>true</IsAvailable>
             </Book>
+            <Book id="28">
+                <PurchaseDate>25/02/2020</PurchaseDate>
+                <IsAvailable>true</IsAvailable>
+            </Book>
+            <Book id="29">
+                <PurchaseDate>25/02/2020</PurchaseDate>
+                <IsAvailable>true</IsAvailable>
+            </Book>
         </Books>
     </Work>
-    <Work id="28">
+    <Work id="30">
         <Author>Jules Verne</Author>
         <Title>Vingt mille lieues sous les mers</Title>
         <Date>01/01/1870</Date>
         <Books>
-            <Book id="29">
-                <PurchaseDate>25/02/2020</PurchaseDate>
-                <IsAvailable>false</IsAvailable>
-            </Book>
-            <Book id="30">
-                <PurchaseDate>25/02/2020</PurchaseDate>
-                <IsAvailable>false</IsAvailable>
-            </Book>
             <Book id="31">
                 <PurchaseDate>25/02/2020</PurchaseDate>
                 <IsAvailable>false</IsAvailable>
             </Book>
-        </Books>
-    </Work>
-    <Work id="32">
-        <Author>Alexandre Dumas</Author>
-        <Title>La Dame aux Camelias</Title>
-        <Date>01/01/1848</Date>
-        <Books>
+            <Book id="32">
+                <PurchaseDate>25/02/2020</PurchaseDate>
+                <IsAvailable>false</IsAvailable>
+            </Book>
             <Book id="33">
                 <PurchaseDate>25/02/2020</PurchaseDate>
                 <IsAvailable>false</IsAvailable>
             </Book>
-            <Book id="34">
+        </Books>
+    </Work>
+    <Work id="34">
+        <Author>Alexandre Dumas</Author>
+        <Title>La Dame aux Camelias</Title>
+        <Date>01/01/1848</Date>
+        <Books>
+            <Book id="35">
+                <PurchaseDate>25/02/2020</PurchaseDate>
+                <IsAvailable>false</IsAvailable>
+            </Book>
+            <Book id="36">
                 <PurchaseDate>25/02/2020</PurchaseDate>
                 <IsAvailable>true</IsAvailable>
             </Book>
-            <Book id="35">
+            <Book id="37">
                 <PurchaseDate>25/02/2020</PurchaseDate>
                 <IsAvailable>true</IsAvailable>
             </Book>
         </Books>
     </Work>
-    <Work id="36">
+    <Work id="38">
         <Author>J.K. Rowling</Author>
         <Title>HarryPotter1</Title>
         <Date>1992</Date>
-        <Books/>
+        <Books>
+            <Book id="39">
+                <PurchaseDate>19/02/2019</PurchaseDate>
+                <IsAvailable>false</IsAvailable>
+            </Book>
+            <Book id="40">
+                <PurchaseDate>19/02/2019</PurchaseDate>
+                <IsAvailable>false</IsAvailable>
+            </Book>
+        </Books>
     </Work>
 </Works>

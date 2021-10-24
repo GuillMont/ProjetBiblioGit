@@ -49,8 +49,11 @@ public class MembersTab {
                         setStyle("");
                     else if (item.booleanValue() == false)
                         setStyle("-fx-background-color: #ff3d35");
-                    else
+                    else{
+                        System.out.println("set color member");
                         setStyle("-fx-background-color: #49ff4f");
+                    }
+
                 }
             };
         });
@@ -86,6 +89,7 @@ public class MembersTab {
     }
 
     public static void updateList(){
+        System.out.println("Update list members");
         ObservableList<Member> membersList = FXCollections.observableArrayList(memberController.getMembers());
         tableAdherent.setItems(membersList);
     }
