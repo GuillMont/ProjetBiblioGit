@@ -1,5 +1,5 @@
 Projet Bibliothèque par
-- Laura JEANNETON
 - Nicolas CAUET
+- Laura JEANNETON
 - Guillaume MONTAGNER
-Consulter la branche master.
+Consulter la branche master utilisée comme principale.
